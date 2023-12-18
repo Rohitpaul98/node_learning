@@ -18,7 +18,22 @@ yargs.version('1.0.0')
 yargs.command({
     command: "add",
     description: "Adds a new note",
-    handler: () => { console.log("Adding a note..."); },
+    builder: {
+        title: {
+            describe: "Note title",
+            demandOption: true,
+            type: "string"
+        },
+        body: {
+            describe: "Note body",
+            demandOption: true,
+            type: "string"
+        }
+    },
+    handler: (argv) => {
+        console.log("Title :" + argv.title)
+        console.log(" Body :" + argv.body)
+    },
 })
 //Create remove command
 yargs.command({
@@ -38,4 +53,5 @@ yargs.command({
     description: "Reads all notes",
     handler: () => { console.log("reading...") }
 })
-console.log(yargs.argv)//array will be printed argv-arguement vector ,process- it is group of methods
+// console.log(yargs.argv)//array will be printed argv-arguement vector ,process- it is group of methods
+yargs.parse();

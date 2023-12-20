@@ -10,7 +10,7 @@
 const color = require('chalk');
 const yargs = require('yargs');
 const notes = require("./notes");
-console.log(color.bgGreen.blue.bold("MyNote--->", notes()));
+
 
 //Accessing Commandline arguements.
 //Create add command
@@ -33,25 +33,57 @@ yargs.command({
     handler: (argv) => {
         console.log("Title :" + argv.title)
         console.log(" Body :" + argv.body)
+        notes.addNote(argv.title, argv.body);
     },
 })
 //Create remove command
 yargs.command({
     command: "remove",
     description: "Removes a note",
-    handler: () => { console.log("Removing a note..."); },
+    builder: {
+        title: {
+            describe: "Removes the note",
+            demandOption: true,
+
+        }
+
+    },
+    handler: (argv) => {
+        console.log("Removing a note...");
+        notes.removeNote(argv.title)
+    },
 })
 //Create command to list all notes
 yargs.command({
     command: "show notes",
     description: "Shows all notes",
-    handler: () => { console.log("Loading the list...") }
+    handler: () => {
+        console.log("Loading the list...")
+        console.log(notes.loadNotes());
+    }
 })
 //Create command to read
 yargs.command({
     command: "read",
-    description: "Reads all notes",
-    handler: () => { console.log("reading...") }
+    description: "Reads note by serial",
+    builder: {
+        serial: {
+            describe: "Get note by serial number",
+            demandOption: true
+        }
+    },
+    handler: (argv) => {
+        if (argv.serial >= 0 && argv.serial < notes.loadNotes().length) {
+            console.log("reading...")
+            console.log(notes.loadNotes()[argv.serial]);
+            console.log(color.green.inverse("Note found with this title!"))
+
+        }
+        else {
+            console.log(color.red.inverse("Entered serial number is not available"));
+        }
+
+    }
 })
 // console.log(yargs.argv)//array will be printed argv-arguement vector ,process- it is group of methods
-yargs.parse();
+yargs.parse();//parsing the command line arguments.

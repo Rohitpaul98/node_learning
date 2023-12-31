@@ -1,5 +1,6 @@
 const path = require('path');
 const express = require("express");
+const hbs = require("hbs");
 const port = process.env.PORT || 3000;
 
 const app = express();
@@ -7,10 +8,12 @@ const app = express();
 //Defined paths for express config, express will find these paths
 const publicDirectory = path.join(__dirname, "../public")
 const viewsDir = path.join(__dirname, "../templates/views")
+const partialsPath = path.join(__dirname, "../templates/partials")
 
 //Setup handlebars and new views location
 app.set("view engine", 'hbs');
 app.set("views", viewsDir);
+hbs.registerPartials(partialsPath)
 
 // served static files on server
 app.use(express.static(publicDirectory))
@@ -18,7 +21,7 @@ app.use(express.static(publicDirectory))
 app.get("", (req, res) => {
     res.render('index', { title: 'weather App', name: 'Rohit' })
 })
-app.get("/about-us", (req, res) => {
+app.get("/aboutus", (req, res) => {
     res.render('about', { title: 'About Us!', name: 'Rohit' })
 })
 app.get("/help", (req, res) => {

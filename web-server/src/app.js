@@ -27,6 +27,13 @@ app.get("/aboutus", (req, res) => {
 app.get("/help", (req, res) => {
     res.render('help', { title: 'We help!', name: 'Rohit' })
 })
+app.get("/help/*", (req, res) => {
+    res.render('404page', { errorMessage: 'Help Article Not Found!' })
+})
+
+app.get("*", (req, res) => {
+    res.render("404page", { errorMessage: "404 Page Not Found!" })
+})
 
 // app.get("/", (req, res) => { res.send("Hello Express!!") });
 

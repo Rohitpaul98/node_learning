@@ -49,7 +49,7 @@ yargs.command({
 
     },
     handler: (argv) => {
-        console.log("Removing a note...");
+        console.log(color.bgred.inverse("Removing a note..."));
         notes.removeNote(argv.title)
     },
 })
@@ -58,8 +58,10 @@ yargs.command({
     command: "show notes",
     description: "Shows all notes",
     handler: () => {
-        console.log("Loading the list...")
-        console.log(notes.loadNotes());
+        console.log(color.green.inverse("Loading the list..."));
+        // console.log(notes.loadNotes());
+        const allNotes = notes.loadNotes();
+        allNotes.map((note, key) => console.log(`${key + 1}.) ${note.title}`));
     }
 })
 //Create command to read
@@ -74,9 +76,10 @@ yargs.command({
     },
     handler: (argv) => {
         if (argv.serial >= 0 && argv.serial < notes.loadNotes().length) {
-            console.log("reading...")
-            console.log(notes.loadNotes()[argv.serial]);
-            console.log(color.green.inverse("Note found with this title!"))
+            console.log(color.green.inverse("reading..."))
+            setTimeout(() => { console.log(color.green.inverse("Note found with this title!")) }, 2000);
+            setTimeout(() => { console.log(notes.loadNotes()[argv.serial]); }, 3000);
+
 
         }
         else {

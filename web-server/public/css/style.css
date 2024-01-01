@@ -1,3 +1,31 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    max-width: 1440px;
+    margin: 0 auto;
+    border: 1px solid rgb(0, 0, 0);
+}
+
 h1 {
+    font-size: 64px;
+    margin-bottom: 16px;
     color: gray;
+}
+
+.header {
+    padding: 10px;
+    background-color: black;
+}
+
+.header a {
+    text-decoration: none;
+
+    margin-top: 48px;
+    color: #ffff;
+    margin-right: 16px;
+}
+
+footer {
+
+    padding: 10px;
+    border-top: 1px solid gray;
 }

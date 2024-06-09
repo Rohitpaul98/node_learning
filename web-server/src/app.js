@@ -31,19 +31,26 @@ app.get("/help/*", (req, res) => {
     res.render('404page', { errorMessage: 'Help Article Not Found!' })
 })
 
-app.get("*", (req, res) => {
-    res.render("404page", { errorMessage: "404 Page Not Found!" })
-})
+// app.get("*", (req, res) => {
+//     res.render("404page", { errorMessage: "404 Page Not Found!" })
+// })
 
 // app.get("/", (req, res) => { res.send("Hello Express!!") });
 
 app.get("/weather", (req, res) => {
+    if (!req.query.address) {
+
+        return res.send({
+            error: "Invalid request! add address in query"
+        });
+    }
     res.send([{
-        forecast: "clear",
+        forecast: "foggy",
         Longitude: "30",
         latitude: "80",
-        location: "Tejli"
+        address: "Tejli"
     }]);
+
 })
 app.listen(port, () => {
     console.log("Server is up and  kicking @" + port);

@@ -1,2 +1,4 @@
 # node_learning
-Pushing what I am learning in nodejs
+It is a rich collection of Nodejs projects(basic to advanced)
+Pushing what I am learning in nodejs.
+You can find according to your need.

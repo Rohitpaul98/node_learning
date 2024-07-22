@@ -25,7 +25,7 @@ yargs.command({
             type: "string"
         },
         body: {
-            describe: "Note body",
+            describe: "Note's content",
             demandOption: true,
             type: "string"
         }
@@ -42,7 +42,7 @@ yargs.command({
     description: "Removes a note",
     builder: {
         title: {
-            describe: "Removes the note",
+            describe: "Removes the note of given title",
             demandOption: true,
 
         }

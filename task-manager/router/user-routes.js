@@ -131,6 +131,9 @@ const uploadProfilePicture = multer({
   limits: {
     fileSize: 1000000
   },
+  filename: (req, file, cb) => {
+    cb(null, file.file.fieldname + '_' + Date.now())
+  },
   fileFilter(req, file, cb) {
     if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
       return cb(new Error("Invalid filetype!please upload JPG or JPEG,PNG"))
@@ -143,7 +146,7 @@ router.post("/user/me/avatar", auth, uploadProfilePicture.single('avatar'), asyn
   const buffer = await sharp(req.file.buffer).resize({ width: 250, height: 250 }).png().toBuffer();
   req.user.avatar = buffer;
   await req.user.save();
-  res.status(200).send({ message: "Image uploaded successfully" })
+  res.status(200).send({ message: "Image uploaded successfully", file: req.file });
 },
   //error handling
   (error, req, res, next) => {
